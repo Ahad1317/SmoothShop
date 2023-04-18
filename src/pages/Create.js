@@ -4,7 +4,7 @@ import supabase from "../config/supabaseClient"
 
 const Create = () => {
   const navigate = useNavigate()
-  
+
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
   const [rating, setRating] = useState('')
@@ -34,7 +34,7 @@ const Create = () => {
   }
 
   return (
-    <div className="createPage">
+    <div className="page create">
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
         <input 

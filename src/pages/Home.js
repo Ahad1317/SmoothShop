@@ -7,6 +7,12 @@ const Home = () => {
   const [fetchError, setFetchError] = useState(null)
   const [smoothes, setSmoothes] = useState(null)
 
+  const handleDelete = (id) => {
+    setSmoothes(prevSmoothes => {
+      return prevSmoothes.filter(sm => sm.id !== id)
+    })
+  }
+
   useEffect(() => {
     const fetchSmoothes = async () => {
       const { data, error } = await supabase
@@ -14,7 +20,7 @@ const Home = () => {
         .select()
       
       if (error) {
-        setFetchError('Could not fetch the smoothies')
+        setFetchError('Could not fetch smoothes')
         setSmoothes(null)
       }
       if (data) {
@@ -28,13 +34,13 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="pageHome">
+    <div className="page Home">
       {fetchError && (<p>{fetchError}</p>)}
       {smoothes && (
         <div className="smoothes">
           <div className="smooth-grid">
             {smoothes.map(smooth => (
-              <SmoothCard key={smooth.id} smooth={smooth} />
+              <SmoothCard key={smooth.id} smooth={smooth} onDelete={handleDelete}/>
             ))}
           </div>
         </div>

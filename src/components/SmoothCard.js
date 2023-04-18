@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import supabase from "../config/supabaseClient"
 
-const SmoothCard = ({ smooth }) => {
+const SmoothCard = ({ smooth, onDelete }) => {
 
   const handleDelete = async () => {
     const { data, error } = await supabase
@@ -14,6 +14,7 @@ const SmoothCard = ({ smooth }) => {
     }
     if (data) {
       console.log(data)
+      onDelete(smooth.id)
     }
   }
 

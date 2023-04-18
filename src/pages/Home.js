@@ -1,40 +1,40 @@
 import supabase from '../config/supabaseClient'
 import { useEffect, useState } from 'react'
 
-import SmoothieCard from '../components/SmoothieCard'
+import SmoothCard from '../components/SmoothCard'
 
 const Home = () => {
   const [fetchError, setFetchError] = useState(null)
-  const [smoothies, setSmoothies] = useState(null)
+  const [smoothes, setSmoothes] = useState(null)
 
   useEffect(() => {
-    const fetchSmoothies = async () => {
+    const fetchSmoothes = async () => {
       const { data, error } = await supabase
-        .from('smoothies')
+        .from('smoothes')
         .select()
       
       if (error) {
         setFetchError('Could not fetch the smoothies')
-        setSmoothies(null)
+        setSmoothes(null)
       }
       if (data) {
-        setSmoothies(data)
+        setSmoothes(data)
         setFetchError(null)
       }
     }
 
-    fetchSmoothies()
+    fetchSmoothes()
 
   }, [])
 
   return (
-    <div className="page home">
+    <div className="pageHome">
       {fetchError && (<p>{fetchError}</p>)}
-      {smoothies && (
-        <div className="smoothies">
-          <div className="smoothie-grid">
-            {smoothies.map(smoothie => (
-              <SmoothieCard key={smoothie.id} smoothie={smoothie} />
+      {smoothes && (
+        <div className="smoothes">
+          <div className="smooth-grid">
+            {smoothes.map(smooth => (
+              <SmoothCard key={smooth.id} smooth={smooth} />
             ))}
           </div>
         </div>
